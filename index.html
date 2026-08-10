@@ -75,25 +75,102 @@
             line-height: 1.6;
             margin-bottom: 0;
         }
-
-        /* 图片卡片样式，和公告统一风格 */
-        .img-wrap {
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto 2rem;
+        
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
-        .img-wrap img {
+        
+        .btn {
+            position: relative;
+            padding: 1.25rem 2rem;
+            border: none;
+            border-radius: 14px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            will-change: transform, box-shadow;
+            z-index: 1;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 8px;
-            /* 图片加载失败提示 */
-            min-height: 300px;
-            object-fit: contain;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+        
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+        }
+        
+        .btn:hover::before {
+            opacity: 1;
+        }
+        
+        .btn:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.16);
+        }
+        
+        .btn:active {
+            transform: translateY(-2px);
+        }
+        
+        .btn:active::after {
+            transform: translate(-50%, -50%) scale(30);
+            opacity: 1;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+        }
+        
+        .btn i {
+            margin-right: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .btn-1 {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+        }
+        
+        .btn-2 {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+        }
+        
+        .btn-3 {
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+            grid-column: span 2;
+        }
+        
+        .btn-4 {
+            background: linear-gradient(135deg, #0088cc 0%, #005580 100%);
+            grid-column: span 2;
         }
         
         .footer {
@@ -127,11 +204,22 @@
         }
         
         @media (max-width: 768px) {
+            .button-grid {
+                grid-template-columns: 1fr;
+                gap: 1.25rem;
+            }
+            
+            .btn-3, .btn-4 {
+                grid-column: span 1;
+            }
+            
+            .btn {
+                padding: 1.1rem 1.75rem;
+                font-size: 1rem;
+            }
+            
             .announcement {
                 padding: 1rem;
-            }
-            .img-wrap {
-                padding: 15px;
             }
         }
     </style>
@@ -144,17 +232,27 @@
         
         <div class="announcement">
             <h2><i class="fas fa-bullhorn"></i>最新公告</h2>
-            <p>加下面我微信之后可以了解拿卡价格，刷机价格，售后所有问题，都可以来联系下面微信，注意事项，工作室，护航首选，提卡之后会进用户群</p>
+            <p>☆小秋全项目公告声明☆
+本系列作品仅供学习研究，使用者的任何行为与应用小秋无关，请在24小时内删除本应用[下载代表同意本协议]
+若有侵权违法行为，请联系我方删除内容
+本卡网均为自愿捐赠
+不支持米八 下单默认同意
+有事联系小秋   恶意投诉拉黑删卡处理</p>
         </div>
-
-
-        <!-- 公告下方直接放图片，链接完全使用你给的外链 -->
-        <div class="img-wrap">
-            <img src="http://www.cccimg.com/view.php/70ef9541af6f5e9d8139f7c8279d5a91.jpg"/>
-        </div>
-
-        <div class="footer">
-            如有问题请扫码联系 | <a href="#">隐私说明</a>
+        
+        <div class="button-grid">
+            <a href="https://shop.368fk.cn/shop/H3GDWHXK" class="btn btn-2" target="_blank">
+                <i class="fas fa-credit-card"></i>
+               <span>免手续费卡网1</span>
+            </a>
+            <a href="https://qun.qq.com/universal-share/share?ac=1&authKey=Lc0QQOs%2BRFFM56ivPuqhTAqLpR101id9bSrunnq8G8chum2jzXpHtOS3T6%2BTQoKA&busi_data=eyJncm91cENvZGUiOiIyNTQ4NzgwMDIiLCJ0b2tlbiI6ImcySk9sTzN4SDB4Nm41Mk9oQzFuOEQ4KzRkajhFWVpvV1dwbU03Nm5aenNXcFZteWJBYzlNVlREUTdiR0xZcGoiLCJ1aW4iOiIyMzkyMDY4MDkzIn0%3D&data=_ixVrS-vWKnGHxBzh43QxBiDrtHHZlGfapcxr39HIFIB-Ou1Q5Y2-bZDkbfEUiqzvAUIywN_5bLiZmGai2kjOw&svctype=4&tempid=h5_group_info" class="btn btn-3" target="_blank">
+                <i class="fab fa-qq"></i>
+                <span>加入QQ群</span>
+            </a>
+            <a href="https://t.me/RNGXIAOQIU" class="btn btn-4" target="_blank">
+                <i class="fab fa-telegram"></i>
+                <span>加入TG群@RNGXIAOQIU</span>
+            </a>
         </div>
     </div>
 </body>
